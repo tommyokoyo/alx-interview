@@ -6,6 +6,12 @@ from collections import deque
 
 
 def canUnlockAll(boxes):
+    """
+        Function that checks from a list the number
+        of keys present to unlock boxes
+        :param boxes:
+        :return:
+    """
     if not boxes:
         return False
     else:
