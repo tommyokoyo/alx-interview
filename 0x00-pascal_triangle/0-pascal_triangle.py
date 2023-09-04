@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-from typing import List
-
-
-def pascal_triangle(n: int) -> List:
+def pascal_triangle(n: int):
     """
         Function that returns a list of integers representing
         the pascals triangle
