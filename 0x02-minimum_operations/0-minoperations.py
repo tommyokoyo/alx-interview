@@ -10,7 +10,7 @@ def minOperations(n):
         :param n:
         :return:
     """
-    if n <= 1:
+    if n <= 2:
         return 0
     else:
         min_op = [0] * (n + 1)
