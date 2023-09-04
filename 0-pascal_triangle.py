@@ -1,4 +1,14 @@
-def pascal_triangle(n: int):
+#!/usr/bin/python3
+from typing import List
+
+
+def pascal_triangle(n: int) -> List:
+    """
+        Function that returns a list of integers representing
+        the pascals triangle
+        :param n: int
+        :return: List
+    """
     if n <= 0:
         return []
     else:
