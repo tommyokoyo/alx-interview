@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
-'''
+"""
 Reads stdin line by line and computes metrics
-'''
+"""
 import sys
+
 
 if __name__ == "__main__":
 
@@ -13,9 +14,9 @@ if __name__ == "__main__":
     count = 1
 
     def print_stats():
-        '''
+        """
         Prints file size and stats for every 10 loops
-        '''
+        """
         print('File size: {}'.format(file_size[0]))
 
         for code in sorted(status_codes.keys()):
@@ -23,9 +24,9 @@ if __name__ == "__main__":
                 print('{}: {}'.format(code, status_codes[code]))
 
     def parse_stdin(line):
-        '''
+        """
         Checks the stdin for matches
-        '''
+        """
         try:
             line = line[:-1]
             word = line.split(' ')
