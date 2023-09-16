@@ -10,9 +10,9 @@ function getMovieCharacters (movieId) {
     } else if (response.statusCode !== 200) {
       console.error('Api call failed - status: ', response.statusCode);
     } else {
-      const movie_characters = body.characters;
+      const movieCharacters = body.characters;
 
-      fetchAndPrintCharacters(movie_characters, 0);
+      fetchAndPrintCharacters(movieCharacters, 0);
     }
   });
 }
