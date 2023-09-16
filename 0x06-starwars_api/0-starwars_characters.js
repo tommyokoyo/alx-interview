@@ -1,27 +1,47 @@
 #!/usr/bin/node
-
 const request = require('request');
-if (process.argv.length === 3) {
-  const myArgs = process.argv.slice(2);
-  const url = 'https://swapi-api.hbtn.io/api/films/' + myArgs[0];
-  const options = { json: true };
 
-  request(url, options, async function (error, res, body) {
+function getMovieCharacters(movieId) {
+  const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
+  request(apiUrl, { json: true }, (error, response, body) => {
     if (error) {
-      console.log(error);
+      console.error('Error: ', error);
+    } else if (response.statusCode !== 200){
+      console.error('Api call failed - status: ', response.statusCode)
     } else {
-      for (const char of body.characters) {
-        const ret = () => {
-          return new Promise((resolve, reject) => {
-            request(char, options, function (error, res, body) {
-              if (error) { console.log(error); } else {
-                resolve(body.name);
-              }
-            });
-          });
-        };
-        console.log(await ret());
-      }
+      const movie_characters = body.characters;
+
+      fetchAndPrintCharacters(movie_characters, 0);
     }
   });
+}
+
+function fetchAndPrintCharacters(characters, index) {
+  if (index >= characters.length) {
+    return [];
+  }
+
+  const characterUrl = characters[index];
+  request(characterUrl, { json: true }, (error, response, body) => {
+    if (error) {
+      console.error('Error fetching character: ', error);
+    } else if (response.statusCode !== 200) {
+      console.error('API Request failed - status code: ', response.statusCode);
+    } else {
+      const characterName = body.name;
+      console.log(characterName);
+      fetchAndPrintCharacters(characters, index + 1);
+    }
+  })
+}
+
+const movieId = process.argv[2];
+if (movieId) {
+  try {
+    getMovieCharacters(movieId);
+  } catch (e) {
+    console.log(`Connection Error: ${e}`);
+  }
+} else {
+  console.error('Please provide a movie ID!.');
 }
